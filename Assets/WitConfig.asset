@@ -1,0 +1,515 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6593477237606319117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c2918ba0e7451694416d42d69e0944, type: 3}
+  m_Name: WitComposerData
+  m_EditorClassIdentifier: 
+  canvases: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5a46bda3295124c99b0e6537ac7252, type: 3}
+  m_Name: WitConfig
+  m_EditorClassIdentifier: 
+  _clientAccessToken: 4JTO75S4GKT5XCOXKFAWRH73PXEZFPTU
+  _appInfo:
+    name: gezyyy
+    id: d8588e59-98f4-4823-86ce-9d9e2389b6b8
+    lang: en
+    isPrivate: 1
+    createdAt: 2024-10-08T09:00:09-0700
+    trainingStatus: 1
+    lastTrainDuration: 156
+    lastTrainedAt: 2024-10-08T09:54:09-0700
+    nextTrainAt: 2024-10-08T09:51:33-0700
+    intents:
+    - id: 528516620125940
+      name: ask_bird_name
+      entities: []
+    - id: 873917051375839
+      name: bird_song
+      entities: []
+    - id: 421350787658383
+      name: change_station
+      entities: []
+    - id: 530686549665175
+      name: close
+      entities: []
+    - id: 1289540812416669
+      name: drop
+      entities: []
+    - id: 344286008706940
+      name: hello
+      entities: []
+    - id: 1078363723636476
+      name: help
+      entities: []
+    - id: 1702589620333772
+      name: jump
+      entities:
+      - name: direction:direction
+        id: 1334693937500985
+      - name: move_strength:move_strength
+        id: 1212716490015846
+    - id: 1777539022986267
+      name: levitate
+      entities: []
+    - id: 1022173369919711
+      name: move
+      entities:
+      - name: direction:direction
+        id: 1334693937500985
+      - name: move_strength:move_strength
+        id: 1212716490015846
+    - id: 1105358001207352
+      name: open
+      entities: []
+    - id: 565954792760297
+      name: polly_want_cracker
+      entities: []
+    - id: 1244290663572325
+      name: pretty_bird
+      entities: []
+    - id: 1216766452887500
+      name: pull
+      entities:
+      - name: direction:direction
+        id: 1334693937500985
+      - name: move_strength:move_strength
+        id: 1212716490015846
+    - id: 2963730197111664
+      name: push
+      entities:
+      - name: direction:direction
+        id: 1334693937500985
+      - name: move_strength:move_strength
+        id: 1212716490015846
+    - id: 394857467009192
+      name: select_color
+      entities:
+      - name: color:color
+        id: 1281176663061068
+    - id: 1107848514105271
+      name: turn_off
+      entities:
+      - name: direction:direction
+        id: 1334693937500985
+    - id: 1048600590233801
+      name: turn_off_radio
+      entities: []
+    - id: 1085697590231431
+      name: turn_off_water
+      entities: []
+    - id: 1273610380339300
+      name: turn_on
+      entities: []
+    - id: 573957888389391
+      name: turn_on_radio
+      entities: []
+    - id: 771860725031120
+      name: turn_on_water
+      entities: []
+    - id: 2824403584527792
+      name: wake_up_bea
+      entities: []
+    entities:
+    - name: color
+      id: 881310817479851
+      lookups:
+      - keywords
+      roles:
+      - name: color
+        id: 1281176663061068
+      keywords:
+      - keyword: blue
+        synonyms:
+        - blue
+      - keyword: red
+        synonyms:
+        - red
+      - keyword: yellow
+        synonyms:
+        - yellow
+    - name: direction
+      id: 920954803181401
+      lookups:
+      - keywords
+      roles:
+      - name: direction
+        id: 1334693937500985
+      keywords:
+      - keyword: across
+        synonyms:
+        - across
+      - keyword: away
+        synonyms:
+        - away
+        - back
+        - backwards
+      - keyword: left
+        synonyms:
+        - left
+      - keyword: right
+        synonyms:
+        - right
+        - write
+      - keyword: toward
+        synonyms:
+        - closer
+        - closer to me
+        - forward
+        - here
+        - this way
+        - toward
+      - keyword: up
+        synonyms:
+        - in the air
+        - to the ceiling
+        - to the sky
+        - up
+      - keyword: wall
+        synonyms:
+        - the wall
+    - name: move_strength
+      id: 902073911836150
+      lookups:
+      - keywords
+      roles:
+      - name: move_strength
+        id: 1212716490015846
+      keywords:
+      - keyword: normal
+        synonyms:
+        - normal
+      - keyword: strong
+        synonyms:
+        - a lot
+        - all the way
+        - blast
+        - fire
+        - high
+        - shoot
+        - shove
+        - strong
+        - throw
+      - keyword: weak
+        synonyms:
+        - a little
+        - a little bit
+        - just a touch
+        - slightly
+        - weak
+    traits:
+    - name: open_close
+      id: 3848381255442261
+      values: []
+    - name: wit$on_off
+      id: 0fee6829-35ce-42b3-8f26-5ebebf40adab
+      values:
+      - id: 1806827899496964
+        value: off
+      - id: 4249815845100592
+        value: on
+    versionTags: []
+    voices:
+    - name: wit$Rebecca
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Charlie
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - fast
+      - projected
+    - name: wit$Cooper
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Vampire
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Prospector
+      locale: en_US
+      gender: male
+      styles:
+      - default
+    - name: wit$Cody
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Remi
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Cam
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Connor
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Railey
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Cael
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Carl
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Rubie
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Overconfident
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Disaffected
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Hollywood
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Trendy
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Cartoon Baby
+      locale: en_US
+      gender: nonbinary
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Surfer
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Southern Accent
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Kenyan Accent
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Cartoon Kid
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Cartoon Villain
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Rosie
+      locale: en_CA
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Colin
+      locale: en_CA
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Pirate
+      locale: en_GB
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$British Butler
+      locale: en_GB
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Whimsical
+      locale: en_GB
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Wizard
+      locale: en_GB
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: wit$Cockney Accent
+      locale: en_GB
+      gender: nonbinary
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+  _configData:
+  - {fileID: -6593477237606319117}
+  _configurationId: adf405e6-60b1-483b-bba5-1a82bb81eb65
+  timeoutMS: 10000
+  endpointConfiguration:
+    _uriScheme: 
+    _authority: 
+    _port: 0
+    _witApiVersion: 
+    _message: 
+    _speech: 
+    _dictation: 
+    _synthesize: 
+    _event: 
+    _converse: 
+  isDemoOnly: 0
+  useConduit: 1
+  _manifestLocalPath: ConduitManifest-f24b9b92-cf7b-45cd-9195-46d95c057b82.json
+  excludedAssemblies:
+  - Oculus.Voice.Demo, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - Meta.WitAi.Samples, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  relaxedResolution: 0
