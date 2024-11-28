@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 670190173264333139}
-  - component: {fileID: 102490448831091297}
   m_Layer: 9
   m_Name: VirtualWindow
   m_TagString: Untagged
@@ -34,18 +33,6 @@ Transform:
   - {fileID: 8109335586375181080}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &102490448831091297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4350422998566360405}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ab3ec25e32ce0c4380714d75e39cb05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6893388497917419898
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +231,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8e63e1588afb49540a7c512a22c5a456, type: 2}
+    - target: {fileID: 7934197050193333140, guid: d5e3c40358f418e4f83b684c8a75d89d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7934197050193333140, guid: d5e3c40358f418e4f83b684c8a75d89d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7934197050193333140, guid: d5e3c40358f418e4f83b684c8a75d89d, type: 3}
       propertyPath: m_LocalScale.z
       value: 4.326173
