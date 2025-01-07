@@ -8,6 +8,10 @@ TagManager:
   - Egipt
   - Ice
   - Orange
+  - Bullet
+  - BlueBall
+  - DevicePart1
+  - Device1Pos
   layers:
   - Default
   - TransparentFX
