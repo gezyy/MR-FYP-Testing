@@ -12,6 +12,9 @@ TagManager:
   - BlueBall
   - DevicePart1
   - Device1Pos
+  - Stone
+  - Rocket
+  - Spaceship
   layers:
   - Default
   - TransparentFX

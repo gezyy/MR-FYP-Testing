@@ -1,105 +1,154 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;  // 用于处理按钮事件
+using System.Collections;
 
-public class CameraController : MonoBehaviour
+public class CameraController: MonoBehaviour
 {
-    public Transform target;  // 目标物体的Transform
+    public Transform target;  // 方向盘（target）
+    public Transform room;  // 房间的Transform
     public Transform spaceship;  // 飞船的Transform
-    public float sensitivity = 1.0f; // 灵敏度，可以调整相机的反应速度
-    public float minYRotation = 5f;  // Y轴旋转的最小值
-    public float maxYRotation = 75f; // Y轴旋转的最大值
-    public float spaceshipRotationSpeed = 3f; // 飞船旋转的平滑速度
-    public float alignmentThreshold = 2f; // 飞船和相机的Y轴旋转差值阈值
-    public float targetXMin = -89f; // 目标物体X轴旋转的最小值
-    public float targetXMax = 89f;  // 目标物体X轴旋转的最大值
 
-    private float lastXRotation;  // 上一次目标物体的X轴旋转值
-    private bool isCameraYLimited = true;  // 相机的Y轴旋转是否受限制
+    public float sensitivity = 1.0f;  // 灵敏度，控制旋转速度
+    public float maxRotationSpeed = 30f;  // 最大旋转速度
+    public float maxAngle = 92.928f;  // 方向盘旋转x的最大值
+    public float minAngle = -87.072f;  // 方向盘旋转x的最小值
+    public float neutralAngle = 2.928f;  // 方向盘旋转x的中立值
+    public float accelerationTime = 1f;  // 从平滑到最大旋转速度的过渡时间
+    public float maxMoveSpeed = 5f;  // 飞船和房间的最大前进速度
+    public float speedChangeDuration = 2f;  // 移动速度变化的持续时间（平滑过渡的时间）
+
+    private float targetRoomRotationY;  // 房间目标的Y轴旋转
+    private float targetSpaceshipRotationY;  // 飞船目标的Y轴旋转
+    private float rotationSpeed;  // 当前旋转速度
+
+    private bool isMoving = false;  // 是否正在移动的标志
+    private float currentMoveSpeed = 0f;  // 当前的移动速度（用于平滑过渡）
+
 
     void Start()
     {
-        if (target != null)
+        if (target == null || room == null || spaceship == null)
         {
-            // 获取目标物体的初始X轴旋转值
-            lastXRotation = target.eulerAngles.x;
-        }
-        else
-        {
-            Debug.LogWarning("Target is not assigned!");
+            Debug.LogWarning("Please assign all required transforms.");
         }
 
-        if (spaceship == null)
-        {
-            Debug.LogWarning("Spaceship is not assigned!");
-        }
+        // 初始化房间和飞船的目标旋转值
+        targetRoomRotationY = room.rotation.eulerAngles.y;
+        targetSpaceshipRotationY = spaceship.rotation.eulerAngles.y;
+
     }
 
     void Update()
     {
-        if (target != null && spaceship != null)
+        if (target != null && room != null && spaceship != null)
         {
-            // 获取目标物体当前的X轴旋转值
-            float currentXRotation = target.eulerAngles.x;
+            // 获取方向盘的当前x旋转角度
+            float targetXRotation = target.rotation.eulerAngles.x;
 
-            // 获取当前相机的Y轴旋转值
-            float currentYRotation = transform.eulerAngles.y;
+            // 计算旋转的增量
+            float deltaRotation = targetXRotation - neutralAngle;
 
-            // 获取飞船的当前Y轴旋转值
-            float spaceshipYRotation = spaceship.eulerAngles.y;
-
-            // 计算目标物体X轴旋转变化量
-            float deltaX = currentXRotation - lastXRotation;
-
-            // 检查飞船和相机的Y轴旋转差值是否在阈值范围内
-            float rotationDifference = Mathf.Abs(Mathf.DeltaAngle(spaceshipYRotation, currentYRotation));
-
-            if (rotationDifference <= alignmentThreshold)
+            // 如果方向盘x旋转超过临界值，则以最大速度旋转
+            if (targetXRotation >= neutralAngle && targetXRotation <= maxAngle)
             {
-                // 如果旋转差值小于阈值，取消相机的Y轴旋转限制
-                isCameraYLimited = false;
+                // 当目标旋转增加时，房间和飞船向左转
+                rotationSpeed = Mathf.Lerp(0, maxRotationSpeed, (targetXRotation - neutralAngle) / (maxAngle - neutralAngle));
+            }
+            else if (targetXRotation <= neutralAngle && targetXRotation >= minAngle)
+            {
+                // 当目标旋转减小时，房间和飞船向右转
+                rotationSpeed = Mathf.Lerp(0, maxRotationSpeed, (neutralAngle - targetXRotation) / (neutralAngle - minAngle));
             }
             else
             {
-                // 否则启用相机的Y轴旋转限制
-                isCameraYLimited = true;
+                // 如果超过最大值或最小值，固定最大速度
+                rotationSpeed = maxRotationSpeed;
             }
 
-            // 处理旋转变化
-            if (deltaX != 0)
+            // 平滑房间和飞船的旋转
+            targetRoomRotationY = Mathf.LerpAngle(room.rotation.eulerAngles.y, room.rotation.eulerAngles.y + deltaRotation, Time.deltaTime * accelerationTime);
+            targetSpaceshipRotationY = Mathf.LerpAngle(spaceship.rotation.eulerAngles.y, spaceship.rotation.eulerAngles.y + deltaRotation, Time.deltaTime * accelerationTime);
+
+            // 最终设置房间和飞船的旋转
+            room.rotation = Quaternion.Euler(room.rotation.eulerAngles.x, targetRoomRotationY, room.rotation.eulerAngles.z);
+            spaceship.rotation = Quaternion.Euler(spaceship.rotation.eulerAngles.x, targetSpaceshipRotationY, spaceship.rotation.eulerAngles.z);
+
+            // 如果正在移动，飞船和房间沿着z轴（正前方）持续移动
+            if (isMoving)
             {
-                float newYRotation = currentYRotation - deltaX * sensitivity;
-
-                // 如果相机的Y轴旋转受限制，则应用限制
-                if (isCameraYLimited)
-                {
-                    newYRotation = Mathf.Clamp(newYRotation, minYRotation, maxYRotation);
-                }
-
-                // 设置相机的新旋转
-                transform.rotation = Quaternion.Euler(transform.eulerAngles.x, newYRotation, transform.eulerAngles.z);
-
-                // 使飞船的Y轴旋转平滑过渡到相机的旋转Y值
-                spaceship.rotation = Quaternion.Lerp(spaceship.rotation, Quaternion.Euler(spaceship.rotation.eulerAngles.x, newYRotation, spaceship.rotation.eulerAngles.z), Time.deltaTime * spaceshipRotationSpeed);
+                MoveForward();
             }
-
-            // 如果目标物体的X轴旋转达到最小或最大限制，自动调整相机的Y轴旋转
-            if (currentXRotation <= targetXMin || currentXRotation >= targetXMax)
-            {
-                // 如果目标物体的X轴旋转达到了限制，自动调整相机的Y轴旋转
-                if (currentXRotation <= targetXMin && currentYRotation > minYRotation)
-                {
-                    // 目标物体的X旋转达到最小，减小相机的Y旋转
-                    transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y + sensitivity * Time.deltaTime * 10, transform.eulerAngles.z);
-                }
-                else if (currentXRotation >= targetXMax && currentYRotation < maxYRotation)
-                {
-                    // 目标物体的X旋转达到最大，增大相机的Y旋转
-                    transform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y - sensitivity * Time.deltaTime * 10, transform.eulerAngles.z);
-                }
-            }
-
-            // 更新最后的X轴旋转值
-            lastXRotation = currentXRotation;
         }
     }
-}
 
+    // 飞船和房间的持续前进（带有平滑过渡的速度）
+    private void MoveForward()
+    {
+        // 基于物体的局部z轴方向来移动
+        Vector3 moveDirection = new Vector3(0, 0, currentMoveSpeed * Time.deltaTime);
+
+        // 沿着房间和飞船的局部z轴（即前方方向）进行平移
+        room.Translate(moveDirection, Space.Self);  // 使用局部空间进行移动
+        spaceship.Translate(moveDirection, Space.Self);  // 使用局部空间进行移动
+    }
+
+    // 控制飞船和房间停止或恢复移动
+    public void ToggleMovement()
+    {
+        // 根据当前状态判断调用停止或启动方法
+        if (isMoving)
+        {
+            StopMovement();
+        }
+        else
+        {
+            StartMovement();
+        }
+    }
+
+    // 启动过程中的平滑加速
+    private void StartMovement()
+    {
+        StartCoroutine(SmoothStart());
+        isMoving = true;  // 启动移动
+    }
+
+    // 停止过程中的平滑减速
+    private void StopMovement()
+    {
+        StartCoroutine(SmoothStop());
+        isMoving = false;  // 停止移动
+    }
+
+    // 启动过程中的平滑加速
+    private IEnumerator SmoothStart()
+    {
+        float startTime = Time.time;
+        float initialSpeed = currentMoveSpeed;
+
+        while (currentMoveSpeed < maxMoveSpeed)
+        {
+            float t = (Time.time - startTime) / speedChangeDuration;
+            currentMoveSpeed = Mathf.Lerp(initialSpeed, maxMoveSpeed, t);
+            yield return null;
+        }
+
+        currentMoveSpeed = maxMoveSpeed;  // 确保最终达到最大速度
+    }
+
+    // 停止过程中的平滑减速
+    private IEnumerator SmoothStop()
+    {
+        float startTime = Time.time;
+        float initialSpeed = currentMoveSpeed;
+
+        while (currentMoveSpeed > 0f)
+        {
+            float t = (Time.time - startTime) / speedChangeDuration;
+            currentMoveSpeed = Mathf.Lerp(initialSpeed, 0f, t);
+            yield return null;
+        }
+
+        currentMoveSpeed = 0f;  // 确保最终停止
+    }
+}
