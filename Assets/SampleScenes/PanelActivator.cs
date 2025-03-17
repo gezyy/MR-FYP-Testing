@@ -27,7 +27,9 @@ public class PanelActivator : MonoBehaviour
     private bool isTargetInFocus = false;
     private bool allObjectsActivated = false;  // 标记所有物体是否已激活
     public GameObject hint;
-
+    public GameObject Athena1;
+    public GameObject Athena2;
+    public GameObject Athena2hint1;
     void Start()
     {
 
@@ -94,8 +96,10 @@ public class PanelActivator : MonoBehaviour
 
 
         // 停止播放 Athena_1
-        athenaAudioController1.PlayVoiceClip(2);
-
+        athenaAudioController1.PlayVoiceClip(1);
+        Athena1.SetActive(false);
+        Athena2hint1.SetActive(false);
+        Athena2.SetActive(true);
         // 禁用粒子系统
         StopParticleSystemRotation();
     }
