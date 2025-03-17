@@ -13,10 +13,7 @@ public class WitConnector : MonoBehaviour
     [SerializeField]
     private AppVoiceExperience _voiceExperience;
 
-    public VirtualPet pet;
-
-    [SerializeField]
-    private OppyAudio oppyAudio;
+    public AthenaListen pet;
 
     public bool currentFocus { private set; get; } = false;
     public UnityEvent<bool> FocusChangeEvt = new UnityEvent<bool>();
@@ -101,7 +98,11 @@ public class WitConnector : MonoBehaviour
 
     void FocusHandler(bool isFocus)
     {
-        WitSwitcher(isFocus && pet.CanListen() && SampleShooter.Instance.isTrigger);
+        if (pet.CanListen())
+        {
+            WitSwitcher(isFocus);
+        }
+        
     }
     #endregion GazeFocus
 
@@ -162,14 +163,9 @@ public class WitConnector : MonoBehaviour
             var actionString = WitResultUtilities.GetFirstEntityValue(response, "oz_action:oz_action");
             switch (actionString)
             {
-                case "hi":
+                case "help":
                     // 播放动作和语音
-                    pet.VoiceCommandHandler("hi");
-                    oppyAudio.PlaySound(0); 
-                    break;
-                case "name":
-                    // 仅播放音频
-                    oppyAudio.PlaySound(1); 
+                    pet.ReplayVideo();
                     break;
                 default:
                     break;

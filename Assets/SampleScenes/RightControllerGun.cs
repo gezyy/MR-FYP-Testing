@@ -5,7 +5,7 @@ public class RightControllerGun: MonoBehaviour
 {
     [SerializeField] private Transform rightControllerPivot; // 手柄位置
     [SerializeField] private GameObject ballPrefab; // 小球预制体
-    [SerializeField] private int initialAmmo = 3; // 初始子弹数量
+    [SerializeField] private int initialAmmo = 30; // 初始子弹数量
     [SerializeField] private Text ammoText; // 子弹数量显示的Text对象
 
     private int currentAmmo; // 当前子弹数量
