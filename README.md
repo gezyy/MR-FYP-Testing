@@ -1,4 +1,4 @@
-![TheWorldBeyond Banner](./Media/CoverMiniLandscape.png "TheWorldBeyond")
+![TheWorldBeyond Banner](./Media/IMREG-titlepage.png "IMREG")
 
 # User Manual
 
