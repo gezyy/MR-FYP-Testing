@@ -14,6 +14,7 @@ public class Portal : MonoBehaviour
     [Tooltip("The target scene name to load upon activation.")]
     [SerializeField]
     private string targetSceneName;  // 目标场景名称
+    public FadeInOut fadeInOut;
 
     void Update()
     {
@@ -32,6 +33,7 @@ public class Portal : MonoBehaviour
         {
             // 切换到目标场景
             SceneManager.LoadScene(targetSceneName);
+            fadeInOut.EndScene();
         }
     }
 }

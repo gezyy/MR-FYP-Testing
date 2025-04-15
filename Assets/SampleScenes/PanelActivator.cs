@@ -12,13 +12,7 @@ public class PanelActivator : MonoBehaviour
 
     // 引用注视检测器
     public GazeFocusDetector gazeFocusDetector;
-
-    // 音频源，用于控制语音播放
-    public AudioSource audioSource;
-
-    // 语音片段，Athena_1 和 Athena_2
-    public AudioClip athena1Clip;
-    public AudioClip athena2Clip;
+    public AthenaAudioController1 athenaAudioController1;
 
     // 粒子系统，用于控制粒子播放和旋转
     public ParticleSystem particleSystem;
@@ -32,16 +26,12 @@ public class PanelActivator : MonoBehaviour
     private Coroutine particleRotationCoroutine;
     private bool isTargetInFocus = false;
     private bool allObjectsActivated = false;  // 标记所有物体是否已激活
-
+    public GameObject hint;
+    public GameObject Athena1;
+    public GameObject Athena2;
+    public GameObject Athena2hint1;
     void Start()
     {
-        // 确保在 Start 时就播放 Athena_1，并让它循环播放
-        if (audioSource != null && athena1Clip != null)
-        {
-            audioSource.clip = athena1Clip;
-            audioSource.loop = true;
-            audioSource.Play();
-        }
 
         // 确保粒子系统初始状态为禁用
         if (particleSystem != null)
@@ -65,6 +55,7 @@ public class PanelActivator : MonoBehaviour
                     // 如果物体没有完全激活，开始激活物体
                     StartActivationSequence();
                     StartParticleSystemRotation();
+                    hint.SetActive(false);
                 }
             }
             else if (!gazeFocusDetector.IsTargetInFocus && isTargetInFocus && !allObjectsActivated)
@@ -73,6 +64,7 @@ public class PanelActivator : MonoBehaviour
                 isTargetInFocus = false;
                 DeactivateAllObjects();
                 StopParticleSystemRotation();
+                hint.SetActive(true);
             }
         }
     }
@@ -102,18 +94,12 @@ public class PanelActivator : MonoBehaviour
         // 所有物体激活后，设置标志
         allObjectsActivated = true;
 
-        // 停止播放 Athena_1 并播放 Athena_2
-        if (audioSource != null)
-        {
-            // 停止播放 Athena_1
-            audioSource.Stop();
 
-            // 播放 Athena_2，只播放一次
-            audioSource.clip = athena2Clip;
-            audioSource.loop = false;  // 禁止循环播放
-            audioSource.Play();
-        }
-
+        // 停止播放 Athena_1
+        athenaAudioController1.PlayVoiceClip(1);
+        Athena1.SetActive(false);
+        Athena2hint1.SetActive(false);
+        Athena2.SetActive(true);
         // 禁用粒子系统
         StopParticleSystemRotation();
     }

@@ -19,7 +19,7 @@ public class FollowTransform : MonoBehaviour
 
     // if no follow transform specified, parent is used
     public Transform followTransform;
-    Transform followTrans;
+    public Transform followTrans;
     private Vector3 prevFollowPos;
 
     [Range(0f, 1f)]
@@ -66,7 +66,7 @@ public class FollowTransform : MonoBehaviour
         }
     }
 
-    void Init()
+    public void Init()
     {
         // assign this transform if not assigned
         if (theTransform == null)
@@ -114,7 +114,7 @@ public class FollowTransform : MonoBehaviour
         }
     }
 
-    void Tick()
+    public void Tick()
     {
         if (followTrans == null)
             return;

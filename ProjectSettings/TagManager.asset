@@ -8,6 +8,34 @@ TagManager:
   - Egipt
   - Ice
   - Orange
+  - Bullet
+  - BlueBall
+  - DevicePart1
+  - Device1Pos
+  - Stone
+  - Rocket
+  - Spaceship
+  - Athena
+  - RedData1
+  - RedData2
+  - RedData3
+  - RedData4
+  - ID
+  - CheckPoint
+  - MidValueTemp
+  - MidValueHum
+  - MidValueAto
+  - Map
+  - code1
+  - code2
+  - code3
+  - code4
+  - code5
+  - flow1
+  - flow2
+  - flow3
+  - flow4
+  - flow5
   layers:
   - Default
   - TransparentFX
