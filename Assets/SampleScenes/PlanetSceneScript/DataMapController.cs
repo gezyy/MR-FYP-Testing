@@ -29,6 +29,7 @@ public class DataMapController : MonoBehaviour
     public GameObject TempChart;
     public GameObject TempText;
     public GameObject GenerateButton;
+    public GameObject DefaultChart;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,7 @@ public class DataMapController : MonoBehaviour
     {
         if(counter >= 3)
         {
+            DefaultChart.SetActive(true);
             TempChart.SetActive(false);
             TempButtons.SetActive(false);
             TempText.SetActive(false);

@@ -67,7 +67,7 @@ public class ThoughtBubble : MonoBehaviour
     public void ShowHint(float hintDuration = 5)
     {
         countdownTimer = hintDuration;
-        _thoughtText.text = "<color=#000000>Ask me to <color=#FF0000>come<color=#000000>, <color=#FF0000>jump <color=#000000>or<br> say <color=#FF0000>hi<color=#000000> to me";
+        _thoughtText.text = "<color=#000000>Ask me to <color=#FF0000>replay video<color=#000000> just<br> say <color=#FF0000>help<color=#000000> to me";
     }
 }
 

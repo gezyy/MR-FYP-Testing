@@ -43,7 +43,9 @@ public class ButtonControl : MonoBehaviour
             // 第一次点击时
             EnableItem(data1);
             tempButtons.SetActive(false);
+            Debug.Log("Disabling tempChart");
             tempChart.SetActive(false);
+            Debug.Log("tempChart active: " + tempChart.activeSelf);
             tempText.SetActive(false);
             HumButtons.SetActive(true);
             HumChart.SetActive(true);
@@ -69,12 +71,6 @@ public class ButtonControl : MonoBehaviour
             AtoText.SetActive(false);
             defaultChart.SetActive(true);
             GenerateButton.SetActive(false);
-        }
-        else
-        {
-            // 如果点击超过3次，则重置点击次数（可选）
-            clickCount = 0;
-            Debug.Log("Resetting button click count.");
         }
     }
 

@@ -30,6 +30,7 @@ public class SubmitButton : MonoBehaviour
     void OnButtonClicked()
     {
         hint7.SetActive(false);
+        Debug.Log("hint7 active: " + hint7.activeSelf);
         Expression.SetActive(false);
         defaultChart.SetActive(false);
         defaultConsole.SetActive(false);
